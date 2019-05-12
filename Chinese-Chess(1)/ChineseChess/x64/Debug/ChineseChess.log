@@ -1,0 +1,10 @@
+﻿  ChineseChess.cpp
+  Draw.cpp
+c:\users\lenovo\downloads\fking-proj-master\chinesechess\draw.cpp(124): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\lenovo\downloads\fking-proj-master\chinesechess\draw.cpp(280): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\lenovo\downloads\fking-proj-master\chinesechess\draw.cpp(436): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\lenovo\downloads\fking-proj-master\chinesechess\draw.cpp(592): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\lenovo\downloads\fking-proj-master\chinesechess\draw.cpp(644): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\lenovo\downloads\fking-proj-master\chinesechess\draw.cpp(748): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+  正在產生程式碼...
+  ChineseChess.vcxproj -> C:\Users\lenovo\Downloads\fking-proj-master\x64\Debug\ChineseChess.exe
