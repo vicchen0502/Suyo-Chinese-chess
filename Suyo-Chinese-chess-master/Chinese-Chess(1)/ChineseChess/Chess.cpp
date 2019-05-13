@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "chess.h"
 
-// 利用巨集先定義 上,下,左,右,ESC
+// 利用巨集先定義 上,下,左,右,ESC,ENTER,SPACE,左右角括號
 #define ESC	27
 #define DIRECTION_KEYBOARD	224
 #define UP     72
@@ -10,11 +10,15 @@
 #define RIGHT  77
 #define ENTER  13
 #define SPACE  32
+#define L_ANGLEBRACKET 44
+#define R_ANGLEBRACKET 46
+
 
 using namespace std;
 vector<string> Chess::chessStep = {};
 int Chess::whoseTurn = 0;
 int Chess::stepNumber = 0;
+int Chess::end = -1;
 //class Chess
 Chess::Chess(string filename)
 {
@@ -100,12 +104,25 @@ vector<int> Chess::selectedChess()
 		else if (ch1 == ENTER)
 		{
 			func = ENTER;
+			//TODO:選單
 			goto afterselect;
 			break;
 		}
 		else if (ch1 == SPACE)
 		{
 			func = SPACE;
+			goto afterselect;
+			break;
+		}
+		else if (ch1 == L_ANGLEBRACKET)
+		{
+			func = L_ANGLEBRACKET;
+			goto afterselect;
+			break;
+		}
+		else if (ch1 == R_ANGLEBRACKET)
+		{
+			func = R_ANGLEBRACKET;
 			goto afterselect;
 			break;
 		}
@@ -145,6 +162,14 @@ afterselect:
 		return position;
 		break;
 	case SPACE:
+		return position;
+		break;
+	case L_ANGLEBRACKET:
+		//TODO:悔棋
+		return position;
+		break;
+	case R_ANGLEBRACKET:
+		//TODO:取消悔棋
 		return position;
 		break;
 	default:
@@ -1324,15 +1349,40 @@ after:
 		{
 			recordChessStep(pos, moveTo);
 			position = moveTo;
+			endGame(position);
 			chessBoard[moveTo[0]][moveTo[1]] = chessBoard[pos[0]][pos[1]];
 			chessBoard[pos[0]][pos[1]] = 0;
 			chessRecord.push_back(chessBoard);
-			//saveBoard("check.txt");
+			//確認是否和局(雙方皆剩下不可過河的棋子)
+			bool tie = false;
+			for (int i = 0; i < 10; i++)
+			{
+				for (int j = 0; j < 9; j++)
+				{
+					if (chessBoard[i][j] == 0 ||
+						chessBoard[i][j] == 1 || chessBoard[i][j] == 2 || chessBoard[i][j] == 3 ||
+						chessBoard[i][j] == 8 || chessBoard[i][j] == 9 || chessBoard[i][j] == 10)
+					{
+						tie = true;
+					}
+					else tie = tie && false;
+				}
+			}
+			if (tie)
+				end = 2;
 			return position;
 			break;
 		}
 		else goto before;
 	case SPACE:
+		return position;
+		break;
+	case L_ANGLEBRACKET:
+		//TODO:悔棋
+		return position;
+		break;
+	case R_ANGLEBRACKET:
+		//TODO:取消悔棋
 		return position;
 		break;
 	default:
@@ -1632,4 +1682,21 @@ void Chess::recordChessStep(vector<int>ori, vector<int>des)
 	halfBack = " ";
 	step >> res;
 	chessStep.push_back(halfFront+res+halfBack);
+}
+
+void Chess::endGame(vector<int>des)
+{
+	if (chessBoard[des[0]][des[1]] == 1)
+	{
+		end = 1;
+	}
+	else if(chessBoard[des[0]][des[1]] == 8)
+	{
+		end = 0;
+	}
+	else end = -1;
+}
+int Chess::getEnd()
+{
+	return end;
 }

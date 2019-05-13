@@ -79,7 +79,7 @@ vector<string>initialRight(vector<string>rightPart)
 	rightPart.push_back("╔ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╗ ");
 	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");
 	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");
-	rightPart.push_back("║ 　　現在輪到　黑色方　下棋　　║ ");
+	rightPart.push_back("║ 　　現在輪到　　色方　下棋　　║ ");
 	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");
 	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");
 	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");

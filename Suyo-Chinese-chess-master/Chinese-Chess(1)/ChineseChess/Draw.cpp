@@ -832,13 +832,28 @@ void Draw::renewLeft()
 void Draw::renewRight()
 {
 	rightPart = initialRight(rightPart);
-	if (Chess::whoseTurn == 0)
+	if (Chess::getEnd() == -1)
 	{
-		rightPart[3] = "║ 　　現在輪到　黑色方　下棋　　║ ";
+		if (Chess::whoseTurn == 0)
+		{
+			rightPart[3] = "║ 　　現在輪到　黑色方　下棋　　║ ";
+		}
+		else if (Chess::whoseTurn == 1)
+		{
+			rightPart[3] = "║ 　　現在輪到　紅色方　下棋　　║ ";
+		}
 	}
-	else if (Chess::whoseTurn == 1)
+	else if(Chess::getEnd() ==  0)
 	{
-		rightPart[3] = "║ 　　現在輪到　紅色方　下棋　　║ ";
+		rightPart[3] = "║ 　　　　黑色方　勝利！　　　　║ "; 
+	}
+	else if (Chess::getEnd() == 1)
+	{
+		rightPart[3] = "║ 　　　　紅色方　勝利！　　　　║ ";
+	}
+	else if (Chess::getEnd() == 2)
+	{
+		rightPart[3] = "║ 　　　　　　和局！　　　　　　║ ";			   
 	}
 	// 後面再持續更新
 }
@@ -986,6 +1001,7 @@ void Draw::showHint(vector<vector<int>>legalList)
 		}
 		else
 		{
+			SetColor(176);
 			switch (Chess::chessBoard[x][y])
 			{
 			case 1:
@@ -1031,6 +1047,7 @@ void Draw::showHint(vector<vector<int>>legalList)
 				cout << "兵" << endl;
 				break;
 			}
+			SetColor(208);
 		}
 	}
 	SetColor(15);

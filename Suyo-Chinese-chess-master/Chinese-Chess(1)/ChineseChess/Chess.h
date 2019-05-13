@@ -13,6 +13,7 @@ private:
 	static int whoseTurn ;
 	static int stepNumber ;
 	static void recordChessStep(vector<int>ori, vector<int>des);
+	static int end;//-1:Ä~Äò 0:¶Â³Ó 1:¬õ³Ó
 public:
 	friend class Draw;
 	Chess(string filename);
@@ -22,6 +23,8 @@ public:
 	void readBoard(string fileName);
 	void saveBoard(string fileName);
 	void nextPlayer();
+	static void endGame(vector<int>des);
+	static int getEnd();
 };
 
 

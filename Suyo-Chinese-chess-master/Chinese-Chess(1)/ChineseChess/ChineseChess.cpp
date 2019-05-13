@@ -10,12 +10,13 @@ int main()
 	// 畫初始化棋盤
 	// 讀取誰先下
 	Chess mainChess("Initial.txt");
+	//Chess mainChess("check.txt"); //和局情況
 	Draw GUI;
 
 	GUI.renewChess();
 	GUI.showOutput();
-
-	while (true)
+	
+	do
 	{
 		vector<int>currentPosition = {};
 		vector<int>nextPosition = {};
@@ -38,13 +39,20 @@ int main()
 			GUI.showOutput();
 			goto reSelect;
 		}
-			
+		
+		if (Chess::getEnd() >= 0)
+		{
+			GUI.renewChess();
+			GUI.showOutput();
+			return Chess::getEnd();
+			break;
+		}
 		mainChess.nextPlayer();
 
 
 		GUI.renewChess();
 		GUI.showOutput();
-	}
+	} while (Chess::getEnd() == -1);
 	return 0;
 }
 
