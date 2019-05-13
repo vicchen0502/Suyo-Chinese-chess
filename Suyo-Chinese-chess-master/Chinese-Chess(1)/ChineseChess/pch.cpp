@@ -92,7 +92,7 @@ vector<string>initialRight(vector<string>rightPart)
 	rightPart.push_back("║ 　Ｅｓｃ選單　＜悔棋　＞還原　║ ");
 	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");
 	rightPart.push_back("║ 　　Ｅｎｔｅｒ　選取棋子　　　║ ");
-	rightPart.push_back("║ 　　　　　　　　　　　　　　　║ ");
+	rightPart.push_back("║ 　　Ｓｐａｃｅ　取消選取　　　║ ");
 	rightPart.push_back("║ 　　　　↑　　　　　　　　　　║ ");
 	rightPart.push_back("║ 　　　←　→　方向鍵控制游標　║ ");
 	rightPart.push_back("║ 　　　　↓　　　　　　　　　　║ ");

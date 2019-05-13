@@ -8,7 +8,8 @@
 #define DOWN   80
 #define LEFT   75
 #define RIGHT  77
-#define ENTER 13
+#define ENTER  13
+#define SPACE  32
 
 using namespace std;
 vector<string> Chess::chessStep = {};
@@ -100,6 +101,13 @@ vector<int> Chess::selectedChess()
 		{
 			func = ENTER;
 			goto afterselect;
+			break;
+		}
+		else if (ch1 == SPACE)
+		{
+			func = SPACE;
+			goto afterselect;
+			break;
 		}
 	}
 	
@@ -134,6 +142,9 @@ afterselect:
 		}
 		else selectedChess();
 
+		return position;
+		break;
+	case SPACE:
 		return position;
 		break;
 	default:
@@ -428,7 +439,7 @@ vector<vector<int>> Chess::whereCanGO(vector<int>pos)
 			if (pos[0] + 1 <= 8 && chessBoard[pos[0]+ 1][pos[1]] == 0)
 			{
 				if (pos[1] - 1 >= 0 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] == 0 ||
-					(chessBoard[pos[0] + 2][pos[1] - 1] >= 8 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] <= 14))
+					(chessBoard[pos[0] + 2][max(pos[1] - 1, 0)] >= 8 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] <= 14))
 				{
 					legalList.push_back({ pos[0] + 2,pos[1] - 1 });
 				}
@@ -440,26 +451,26 @@ vector<vector<int>> Chess::whereCanGO(vector<int>pos)
 			}
 			if (pos[1] - 1 >= 1 && chessBoard[pos[0]][pos[1] - 1] == 0)
 			{
-				if (chessBoard[pos[0] - 1][pos[1] - 2] == 0 ||
-					(chessBoard[pos[0] - 1][pos[1] - 2] >= 8 && chessBoard[pos[0] - 1][pos[1] - 2] <= 14))
+				if (pos[0] - 1 >= 0 && chessBoard[max(pos[0] - 1,0)][pos[1] - 2] == 0 ||
+					(chessBoard[max(pos[0] - 1, 0)][pos[1] - 2] >= 8 && chessBoard[max(pos[0] - 1, 0)][pos[1] - 2] <= 14))
 				{
 					legalList.push_back({ pos[0] - 1,pos[1] - 2 });
 				}
-				if (chessBoard[pos[0] + 1][pos[1] - 2] == 0 ||
-					(chessBoard[pos[0] + 1][pos[1] - 2] >= 8 && chessBoard[pos[0] + 1][pos[1] - 2] <= 14))
+				if (pos[0] + 1 <= 9 && chessBoard[min(pos[0] + 1,9)][pos[1] - 2] == 0 ||
+					(chessBoard[min(pos[0] + 1, 9)][pos[1] - 2] >= 8 && chessBoard[min(pos[0] + 1, 9)][pos[1] - 2] <= 14))
 				{
 					legalList.push_back({ pos[0] + 1,pos[1] - 2 });
 				}
 			}
 			if (pos[1] + 1 <= 7 && chessBoard[pos[0]][pos[1] + 1] == 0)
 			{
-				if (chessBoard[pos[0] - 1][pos[1] + 2] == 0 ||
-					(chessBoard[pos[0] - 1][pos[1] + 2] >= 8 && chessBoard[pos[0] - 1][pos[1] + 2] <= 14))
+				if (pos[0] - 1 >= 0 && chessBoard[max(pos[0] - 1, 0)][pos[1] + 2] == 0 ||
+					(chessBoard[max(pos[0] - 1, 0)][pos[1] + 2] >= 8 && chessBoard[max(pos[0] - 1, 0)][pos[1] + 2] <= 14))
 				{
 					legalList.push_back({ pos[0] - 1,pos[1] + 2 });
 				}
-				if (chessBoard[pos[0] + 1][pos[1] + 2] == 0 ||
-					(chessBoard[pos[0] + 1][pos[1] + 2] >= 8 && chessBoard[pos[0] + 1][pos[1] + 2] <= 14))
+				if (pos[0] + 1 <= 9 && chessBoard[min(pos[0] + 1, 9)][pos[1] + 2] == 0 ||
+					(chessBoard[min(pos[0] + 1, 9)][pos[1] + 2] >= 8 && chessBoard[min(pos[0] + 1, 9)][pos[1] + 2] <= 14))
 				{
 					legalList.push_back({ pos[0] + 1,pos[1] + 2 });
 				}
@@ -946,63 +957,63 @@ vector<vector<int>> Chess::whereCanGO(vector<int>pos)
 		}
 		case 5:  //傌
 		{
-			
-		if (pos[0] - 1 >= 1 && chessBoard[pos[0] - 1][pos[1]] == 0)
-		{
-			if (pos[1] - 1 >= 0 && chessBoard[pos[0] - 2][max(pos[1] - 1,0)] == 0 ||
-				(chessBoard[pos[0] - 2][max(pos[1] - 1,0)] >= 1 && chessBoard[pos[0] - 2][max(pos[1] - 1,0)] <= 7))
+
+			if (pos[0] - 1 >= 1 && chessBoard[pos[0] - 1][pos[1]] == 0)
 			{
-				legalList.push_back({ pos[0] - 2,pos[1] - 1 });
+				if (pos[1] - 1 >= 0 && chessBoard[pos[0] - 2][max(pos[1] - 1, 0)] == 0 ||
+					(chessBoard[pos[0] - 2][max(pos[1] - 1, 0)] >= 1 && chessBoard[pos[0] - 2][max(pos[1] - 1, 0)] <= 7))
+				{
+					legalList.push_back({ pos[0] - 2,pos[1] - 1 });
+				}
+				if (pos[1] + 1 <= 8 && chessBoard[pos[0] - 2][min(pos[1] + 1, 8)] == 0 ||
+					(chessBoard[pos[0] - 2][min(pos[1] + 1, 8)] >= 1 && chessBoard[pos[0] - 2][min(pos[1] + 1, 8)] <= 7))
+				{
+					legalList.push_back({ pos[0] - 2,pos[1] + 1 });
+				}
 			}
-			if (pos[1] + 1 <= 8 && chessBoard[pos[0] - 2][min(pos[1] + 1,8)] == 0 ||
-				(chessBoard[pos[0] - 2][min(pos[1] + 1,8)] >= 1 && chessBoard[pos[0] - 2][min(pos[1] + 1,8)] <= 7))
+			if (pos[0] + 1 <= 8 && chessBoard[pos[0] + 1][pos[1]] == 0)
 			{
-				legalList.push_back({ pos[0] - 2,pos[1] + 1 });
+				if (pos[1] - 1 >= 0 && chessBoard[pos[0] + 2][max(pos[1] - 1, 0)] == 0 ||
+					(chessBoard[pos[0] + 2][max(pos[1] - 1, 0)] >= 1 && chessBoard[pos[0] + 2][max(pos[1] - 1, 0)] <= 7))
+				{
+					legalList.push_back({ pos[0] + 2,pos[1] - 1 });
+				}
+				if (pos[1] + 1 <= 8 && chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] == 0 ||
+					(chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] >= 1 && chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] <= 7))
+				{
+					legalList.push_back({ pos[0] + 2,pos[1] + 1 });
+				}
 			}
+			if (pos[1] - 1 >= 1 && chessBoard[pos[0]][pos[1] - 1] == 0)
+			{
+				if (pos[0] - 1 >= 0 && chessBoard[max(pos[0] - 1, 0)][pos[1] - 2] == 0 ||
+					(chessBoard[max(pos[0] - 1, 0)][pos[1] - 2] >= 1 && chessBoard[max(pos[0] - 1, 0)][pos[1] - 2] <= 7))
+				{
+					legalList.push_back({ pos[0] - 1,pos[1] - 2 });
+				}
+				if (pos[0] + 1 <= 9 && chessBoard[min(pos[0] + 1, 9)][pos[1] - 2] == 0 ||
+					(chessBoard[min(pos[0] + 1, 9)][pos[1] - 2] >= 1 && chessBoard[min(pos[0] + 1, 9)][pos[1] - 2] <= 7))
+				{
+					legalList.push_back({ pos[0] + 1,pos[1] - 2 });
+				}
+			}
+			if (pos[1] + 1 <= 7 && chessBoard[pos[0]][pos[1] + 1] == 0)
+			{
+				if (pos[0] - 1 >= 0 && chessBoard[max(pos[0] - 1, 0)][pos[1] + 2] == 0 ||
+					(chessBoard[max(pos[0] - 1, 0)][pos[1] + 2] >= 1 && chessBoard[max(pos[0] - 1, 0)][pos[1] + 2] <= 7))
+				{
+					legalList.push_back({ pos[0] - 1,pos[1] + 2 });
+				}
+				if (pos[0] + 1 <= 9 && chessBoard[min(pos[0] + 1, 9)][pos[1] + 2] == 0 ||
+					(chessBoard[min(pos[0] + 1, 9)][pos[1] + 2] >= 1 && chessBoard[min(pos[0] + 1, 9)][pos[1] + 2] <= 7))
+				{
+					legalList.push_back({ pos[0] + 1,pos[1] + 2 });
+				}
+			}
+			break;
 		}
-		if (pos[0] + 1 <= 8 && chessBoard[pos[0]+ 1][pos[1]] == 0)
-		{
-			cout << 1;
-			if (pos[1] - 1 >= 0 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] == 0 ||
-				(chessBoard[pos[0] + 2][max(pos[1] - 1,0)] >= 1 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] <= 7))
-			{
-				legalList.push_back({ pos[0] + 2,pos[1] - 1 });
-			}
-			if (pos[1] + 1 <= 8 && chessBoard[pos[0] + 2][min(pos[1] + 1,8)] == 0 ||
-				(chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] >= 1 && chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] <= 7))
-			{
-				legalList.push_back({ pos[0] + 2,pos[1] + 1 });
-			}
-		}
-		if (pos[1] - 1 >= 1 && chessBoard[pos[0]][pos[1] - 1] == 0)
-		{
-			if (chessBoard[pos[0] - 1][pos[1] - 2] == 0 ||
-				(chessBoard[pos[0] - 1][pos[1] - 2] >= 1 && chessBoard[pos[0] - 1][pos[1] - 2] <= 7))
-			{
-				legalList.push_back({ pos[0] - 1,pos[1] - 2 });
-			}
-			if (chessBoard[pos[0] + 1][pos[1] - 2] == 0 ||
-				(chessBoard[pos[0] + 1][pos[1] - 2] >= 1 && chessBoard[pos[0] + 1][pos[1] - 2] <= 7))
-			{
-				legalList.push_back({ pos[0] + 1,pos[1] - 2 });
-			}
-		}
-		if (pos[1] + 1 <=  8 && chessBoard[pos[0]][pos[1] + 1] == 0)
-		{
-			cout << 3;
-			if (chessBoard[pos[0] - 1][pos[1] + 2] == 0 ||
-				(chessBoard[pos[0] - 1][pos[1] + 2] >= 1 && chessBoard[pos[0] - 1][pos[1] + 2] <= 7))
-			{
-				legalList.push_back({ pos[0] - 1,pos[1] + 2 });
-			}
-			if (chessBoard[pos[0] + 1][pos[1] + 2] == 0 ||
-				(chessBoard[pos[0] + 1][pos[1] + 2] >= 1 && chessBoard[pos[0] + 1][pos[1] + 2] <= 7))
-			{
-				legalList.push_back({ pos[0] + 1,pos[1] + 2 });
-			}
-		}
-		break;
-	}
+		
+	
 		case 6:  //炮
 		{
 		// 向左走
@@ -1292,6 +1303,12 @@ before:
 			goto after;
 			break;
 		}
+		else if (ch1 == SPACE)
+		{
+			func = SPACE;
+			goto after;
+			break;
+		}
 	}
 
 after:
@@ -1315,6 +1332,9 @@ after:
 			break;
 		}
 		else goto before;
+	case SPACE:
+		return position;
+		break;
 	default:
 		goto before;
 		break;
@@ -1519,7 +1539,7 @@ void Chess::recordChessStep(vector<int>ori, vector<int>des)
 			}
 			else if (des[0] > ori[0])
 			{
-				step << "退" << fullC[10 - (ori[0] - des[0])];
+				step << "退" << fullC[10 + (ori[0] - des[0])];
 			}
 			else
 			{
@@ -1556,7 +1576,7 @@ void Chess::recordChessStep(vector<int>ori, vector<int>des)
 			}
 			else if (des[0] > ori[0])
 			{
-				step << "退" << fullC[10 - (ori[0] - des[0])];
+				step << "退" << fullC[10 + (ori[0] - des[0])];
 			}
 			else
 			{
@@ -1582,7 +1602,7 @@ void Chess::recordChessStep(vector<int>ori, vector<int>des)
 			}
 			else if (des[0] > ori[0])
 			{
-				step << "退" << fullC[10 - (ori[0] - des[0])];
+				step << "退" << fullC[10 + (ori[0] - des[0])];
 			}
 			else
 			{

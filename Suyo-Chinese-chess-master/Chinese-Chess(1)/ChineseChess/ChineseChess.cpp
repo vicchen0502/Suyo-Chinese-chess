@@ -19,17 +19,26 @@ int main()
 	{
 		vector<int>currentPosition = {};
 		vector<int>nextPosition = {};
-		vector<vector<int>>legal = { };
-
+		vector<vector<int>>legal = {};
+		const vector<int>selectError = { -1,-1 };
+		reSelect:
 		currentPosition = mainChess.selectedChess();
+		if (currentPosition == selectError)
+			goto reSelect;
 		legal = mainChess.whereCanGO(currentPosition);
+		if (legal.size() == 0)
+			goto reSelect;
 		// 提示可下的位置
 		GUI.showHint(legal);
 		// 移動棋子、改棋盤，畫出棋盤
 		nextPosition = mainChess.moveChess(currentPosition);
-		cout << "m";
-
-		//cout << nextPosition[0] << " " << nextPosition[1] << endl;
+		if (nextPosition == selectError)
+		{
+			GUI.renewChess();
+			GUI.showOutput();
+			goto reSelect;
+		}
+			
 		mainChess.nextPlayer();
 
 
