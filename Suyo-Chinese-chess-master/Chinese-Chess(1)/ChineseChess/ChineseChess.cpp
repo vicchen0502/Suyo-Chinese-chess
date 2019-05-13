@@ -23,13 +23,11 @@ int main()
 
 		currentPosition = mainChess.selectedChess();
 		legal = mainChess.whereCanGO(currentPosition);
-
 		// 提示可下的位置
 		GUI.showHint(legal);
-
 		// 移動棋子、改棋盤，畫出棋盤
 		nextPosition = mainChess.moveChess(currentPosition);
-
+		cout << "m";
 
 		//cout << nextPosition[0] << " " << nextPosition[1] << endl;
 		mainChess.nextPlayer();

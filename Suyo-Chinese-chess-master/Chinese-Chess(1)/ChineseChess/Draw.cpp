@@ -814,7 +814,18 @@ void Draw::renewLeft()
 	leftPart = initialSituation(leftPart);
 	if (Chess::chessStep.size() > 0)
 	{
-		leftPart[Chess::stepNumber] = Chess::chessStep[Chess::stepNumber - 1];
+		int n;
+		if (Chess::stepNumber < 20)
+		{
+			n = Chess::stepNumber;
+		}
+		else
+		{
+			n = Chess::stepNumber % 19;
+			if (n == 0)
+				n = 19;
+		}
+			leftPart[n] = Chess::chessStep[Chess::stepNumber - 1];
 	}
 }
 

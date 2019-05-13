@@ -414,26 +414,26 @@ vector<vector<int>> Chess::whereCanGO(vector<int>pos)
 		{
 			if (pos[0] - 1 >= 1 && chessBoard[pos[0] - 1][pos[1]] == 0)
 			{
-				if (chessBoard[pos[0] - 2][pos[1] - 1] == 0 ||
-					(chessBoard[pos[0] - 2][pos[1] - 1] >= 8 && chessBoard[pos[0] - 2][pos[1] - 1] <= 14))
+				if (pos[1] - 1 >= 0 && chessBoard[pos[0] - 2][max(pos[1] - 1,0)] == 0 ||
+					(chessBoard[pos[0] - 2][max(pos[1] - 1, 0)] >= 8 && chessBoard[pos[0] - 2][max(pos[1] - 1, 0)] <= 14))
 				{
 					legalList.push_back({ pos[0] - 2,pos[1] - 1 });
 				}
-				if (chessBoard[pos[0] - 2][pos[1] + 1] == 0 ||
-					(chessBoard[pos[0] - 2][pos[1] + 1] >= 8 && chessBoard[pos[0] - 2][pos[1] + 1] <= 14))
+				if (pos[1] + 1 <= 8 && chessBoard[pos[0] - 2][min(pos[1] + 1,8)] == 0 ||
+					(chessBoard[pos[0] - 2][min(pos[1] + 1,8)] >= 8 && chessBoard[pos[0] - 2][min(pos[1] + 1,8)] <= 14))
 				{
 					legalList.push_back({ pos[0] - 2,pos[1] + 1 });
 				}
 			}
-			if (pos[0] + 1 <= 8 && chessBoard[pos[0 + 1]][pos[1]] == 0)
+			if (pos[0] + 1 <= 8 && chessBoard[pos[0]+ 1][pos[1]] == 0)
 			{
-				if (chessBoard[pos[0] + 2][pos[1] - 1] == 0 ||
-					(chessBoard[pos[0] + 2][pos[1] - 1] >= 8 && chessBoard[pos[0] + 2][pos[1] - 1] <= 14))
+				if (pos[1] - 1 >= 0 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] == 0 ||
+					(chessBoard[pos[0] + 2][pos[1] - 1] >= 8 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] <= 14))
 				{
 					legalList.push_back({ pos[0] + 2,pos[1] - 1 });
 				}
-				if (chessBoard[pos[0] + 2][pos[1] + 1] == 0 ||
-					(chessBoard[pos[0] + 2][pos[1] + 1] >= 8 && chessBoard[pos[0] + 2][pos[1] + 1] <= 14))
+				if (pos[1] + 1 <= 8 && chessBoard[pos[0] + 2][min(pos[1] + 1,8)] == 0 ||
+					(chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] >= 8 && chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] <= 14))
 				{
 					legalList.push_back({ pos[0] + 2,pos[1] + 1 });
 				}
@@ -946,28 +946,30 @@ vector<vector<int>> Chess::whereCanGO(vector<int>pos)
 		}
 		case 5:  //傌
 		{
+			
 		if (pos[0] - 1 >= 1 && chessBoard[pos[0] - 1][pos[1]] == 0)
 		{
-			if (chessBoard[pos[0] - 2][pos[1] - 1] == 0 ||
-				(chessBoard[pos[0] - 2][pos[1] - 1] >= 1 && chessBoard[pos[0] - 2][pos[1] - 1] <= 7))
+			if (pos[1] - 1 >= 0 && chessBoard[pos[0] - 2][max(pos[1] - 1,0)] == 0 ||
+				(chessBoard[pos[0] - 2][max(pos[1] - 1,0)] >= 1 && chessBoard[pos[0] - 2][max(pos[1] - 1,0)] <= 7))
 			{
 				legalList.push_back({ pos[0] - 2,pos[1] - 1 });
 			}
-			if (chessBoard[pos[0] - 2][pos[1] + 1] == 0 ||
-				(chessBoard[pos[0] - 2][pos[1] + 1] >= 1 && chessBoard[pos[0] - 2][pos[1] + 1] <= 7))
+			if (pos[1] + 1 <= 8 && chessBoard[pos[0] - 2][min(pos[1] + 1,8)] == 0 ||
+				(chessBoard[pos[0] - 2][min(pos[1] + 1,8)] >= 1 && chessBoard[pos[0] - 2][min(pos[1] + 1,8)] <= 7))
 			{
 				legalList.push_back({ pos[0] - 2,pos[1] + 1 });
 			}
 		}
-		if (pos[0] + 1 <= 8 && chessBoard[pos[0 + 1]][pos[1]] == 0)
+		if (pos[0] + 1 <= 8 && chessBoard[pos[0]+ 1][pos[1]] == 0)
 		{
-			if (chessBoard[pos[0] + 2][pos[1] - 1] == 0 ||
-				(chessBoard[pos[0] + 2][pos[1] - 1] >= 1 && chessBoard[pos[0] + 2][pos[1] - 1] <= 7))
+			cout << 1;
+			if (pos[1] - 1 >= 0 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] == 0 ||
+				(chessBoard[pos[0] + 2][max(pos[1] - 1,0)] >= 1 && chessBoard[pos[0] + 2][max(pos[1] - 1,0)] <= 7))
 			{
 				legalList.push_back({ pos[0] + 2,pos[1] - 1 });
 			}
-			if (chessBoard[pos[0] + 2][pos[1] + 1] == 0 ||
-				(chessBoard[pos[0] + 2][pos[1] + 1] >= 1 && chessBoard[pos[0] + 2][pos[1] + 1] <= 7))
+			if (pos[1] + 1 <= 8 && chessBoard[pos[0] + 2][min(pos[1] + 1,8)] == 0 ||
+				(chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] >= 1 && chessBoard[pos[0] + 2][min(pos[1] + 1, 8)] <= 7))
 			{
 				legalList.push_back({ pos[0] + 2,pos[1] + 1 });
 			}
@@ -985,8 +987,9 @@ vector<vector<int>> Chess::whereCanGO(vector<int>pos)
 				legalList.push_back({ pos[0] + 1,pos[1] - 2 });
 			}
 		}
-		if (pos[1] + 1 <= 7 && chessBoard[pos[0]][pos[1] + 1] == 0)
+		if (pos[1] + 1 <=  8 && chessBoard[pos[0]][pos[1] + 1] == 0)
 		{
+			cout << 3;
 			if (chessBoard[pos[0] - 1][pos[1] + 2] == 0 ||
 				(chessBoard[pos[0] - 1][pos[1] + 2] >= 1 && chessBoard[pos[0] - 1][pos[1] + 2] <= 7))
 			{
@@ -1307,7 +1310,7 @@ after:
 			chessBoard[moveTo[0]][moveTo[1]] = chessBoard[pos[0]][pos[1]];
 			chessBoard[pos[0]][pos[1]] = 0;
 			chessRecord.push_back(chessBoard);
-			
+			//saveBoard("check.txt");
 			return position;
 			break;
 		}
@@ -1390,6 +1393,8 @@ void Chess::recordChessStep(vector<int>ori, vector<int>des)
 		num.push_back(temp % 10);
 		temp /= 10;
 	}
+	for (int i = 0; i < num.size()-1;i++)
+		step << "\b\b";
 	for (int i = num.size() - 1; i >= 0; i--)
 	{
 		step << fullA[num[i]];
