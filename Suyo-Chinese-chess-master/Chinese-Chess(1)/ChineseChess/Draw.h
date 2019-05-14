@@ -19,7 +19,7 @@ public:
 	void showHint(vector<vector<int>>legalList);
 	void renewChess();
 	void showRegretMenu();
-	void showCancelRegretMenu();
+	void showUndoMenu();
 
 	int selectRegret();
 

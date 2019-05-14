@@ -27,9 +27,11 @@ public:
 	void nextPlayer();
 	void renewHistory();
 	void assignBoard();
+	void Undo();
 	static void endGame(vector<int>des);
 	static int getEnd();
 	static int& getStepNumber();
+	int getStackSize();
 };
 
 

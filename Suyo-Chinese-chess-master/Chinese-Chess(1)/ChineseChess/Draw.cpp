@@ -1159,7 +1159,7 @@ int Draw::selectRegret()
 	}
 }
 
-void Draw::showCancelRegretMenu()
+void Draw::showUndoMenu()
 {
 	int X = 35;
 	int Y = 8;

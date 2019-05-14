@@ -169,8 +169,7 @@ afterselect:
 		break;
 	case R_ANGLEBRACKET:
 		//TODO:取消悔棋
-		//return {-3,-3};
-		return position;
+		return {-3,-3};
 		break;
 	default:
 		goto beforeSelect;
@@ -1430,6 +1429,8 @@ void Chess::saveBoard(string filename)
 
 void Chess::nextPlayer()
 {
+	recordStack.clear();
+	stepStack.clear();
 	if (whoseTurn == 0)
 	{
 		whoseTurn = 1;
@@ -1719,17 +1720,38 @@ void Chess::assignBoard()
 	chessRecord.pop_back();
 	chessStep.pop_back();
 	recordStack.push_back(chessRecord[chessRecord.size() - 1]);
+	stepStack.push_back(chessStep[chessStep.size() - 1]);
 	chessRecord.pop_back();
 	chessStep.pop_back();
-	/*system("cls");
-	for (auto s : chessStep)
-		cout << s << endl;
-	cout << stepNumber << endl;
-	system("pause");*/
+
+
 	chessBoard = chessRecord[chessRecord.size() - 1];
 	Draw::leftPart[stepNumber] = "║ 　　　　　　　　　　　║ ";
 	stepNumber -= 1;
 	Draw::leftPart[stepNumber] = "║ 　　　　　　　　　　　║ ";
 	stepNumber -= 1;
-	//Draw::leftPart.pop_back();
+	
+}
+
+void Chess::Undo()
+{
+	chessRecord.push_back(recordStack[recordStack.size() - 1]);
+	chessStep.push_back(stepStack[stepStack.size() - 1]);
+	recordStack.pop_back();
+	stepStack.pop_back();
+	stepNumber += 1;
+	Draw::leftPart[stepNumber] = chessStep[stepNumber-1];
+
+	chessRecord.push_back(recordStack[recordStack.size() - 1]);
+	chessStep.push_back(stepStack[stepStack.size() - 1]);
+	recordStack.pop_back();
+	stepStack.pop_back();
+	stepNumber += 1;
+	Draw::leftPart[stepNumber] = chessStep[stepNumber - 1];
+	chessBoard = chessRecord[chessRecord.size() - 1];
+}
+
+int Chess::getStackSize()
+{
+	return stepStack.size();
 }
