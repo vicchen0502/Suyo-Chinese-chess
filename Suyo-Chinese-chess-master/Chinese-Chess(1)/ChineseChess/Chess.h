@@ -23,8 +23,11 @@ public:
 	void readBoard(string fileName);
 	void saveBoard(string fileName);
 	void nextPlayer();
+	void renewHistory();
+	void assignBoard(int count);
 	static void endGame(vector<int>des);
 	static int getEnd();
+	static int getStepNumber();
 };
 
 

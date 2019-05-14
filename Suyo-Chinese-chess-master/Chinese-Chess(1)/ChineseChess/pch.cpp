@@ -100,4 +100,18 @@ vector<string>initialRight(vector<string>rightPart)
 	return rightPart;
 }
 
+vector<string>initialRegret(vector<string>regretMenu)
+{
+	regretMenu.clear();
+	regretMenu.push_back("╔ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╗ ");
+	regretMenu.push_back("║ 　　　　　　　　　　　║ ");
+	regretMenu.push_back("║ 　　　　　　　　　　　║ ");
+	regretMenu.push_back("║ 　　　確定毀棋？　　　║ ");
+	regretMenu.push_back("║ 　　　　　　　　　　　║ ");
+	regretMenu.push_back("║ 　　是　　　　否　　　║ ");
+	regretMenu.push_back("║ 　　　　　　　　　　　║ ");
+	regretMenu.push_back("║ 　　　　　　　　　　　║ ");
+	regretMenu.push_back("╚ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╝ ");
+	return regretMenu;
+}
 // 一般會略過此檔案，但若您目前正使用先行編譯過的標頭，則會先保留該檔案。

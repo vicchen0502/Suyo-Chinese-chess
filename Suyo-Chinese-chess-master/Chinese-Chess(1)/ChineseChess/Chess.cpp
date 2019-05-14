@@ -166,7 +166,7 @@ afterselect:
 		break;
 	case L_ANGLEBRACKET:
 		//TODO:悔棋
-		return position;
+		return {-2,-2};
 		break;
 	case R_ANGLEBRACKET:
 		//TODO:取消悔棋
@@ -1352,7 +1352,7 @@ after:
 			endGame(position);
 			chessBoard[moveTo[0]][moveTo[1]] = chessBoard[pos[0]][pos[1]];
 			chessBoard[pos[0]][pos[1]] = 0;
-			chessRecord.push_back(chessBoard);
+			//chessRecord.push_back(chessBoard);
 			//確認是否和局(雙方皆剩下不可過河的棋子)
 			bool tie = false;
 			for (int i = 0; i < 10; i++)
@@ -1696,7 +1696,22 @@ void Chess::endGame(vector<int>des)
 	}
 	else end = -1;
 }
+
 int Chess::getEnd()
 {
 	return end;
+}
+
+void Chess::renewHistory()
+{
+	chessRecord.push_back(chessBoard);
+}
+
+int Chess::getStepNumber()
+{
+	return stepNumber;
+}
+void Chess::assignBoard(int count)
+{
+	chessBoard = chessRecord[count];
 }

@@ -34,4 +34,6 @@ vector<string> intialBoard(vector<string>chessBoard);
 vector<string>initialSituation(vector<string>leftPart);
 // 初始化右側顯示
 vector<string>initialRight(vector<string>rightPart);
+// 毀棋選單
+vector<string>initialRegret(vector<string>regretMenu);
 #endif //PCH_H

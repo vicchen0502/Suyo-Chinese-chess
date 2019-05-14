@@ -15,7 +15,7 @@ int main()
 
 	GUI.renewChess();
 	GUI.showOutput();
-	
+	mainChess.renewHistory();
 	do
 	{
 		vector<int>currentPosition = {};
@@ -23,13 +23,45 @@ int main()
 		vector<vector<int>>legal = {};
 		vector<vector<int>>nextLegal = {};
 		const vector<int>selectError = { -1,-1 };
+		const vector<int>regret = { -2,-2 };
 		reSelect:
 		currentPosition = mainChess.selectedChess();
 		if (currentPosition == selectError)
 			goto reSelect;
+		else if (currentPosition == regret)
+		{
+			int change;
+			GUI.showRegretMenu();
+			change = GUI.selectRegret();
+			// 不毀棋。
+			if (change == 1)
+			{
+				GUI.showOutput();
+				goto reSelect;
+			}
+			// 毀棋
+			else if (change == 0)
+			{
+				if (Chess::getStepNumber() >= 2)
+				{
+					int count = Chess::getStepNumber() - 2;
+					mainChess.assignBoard(count);
+					GUI.renewChess();
+					GUI.showOutput();
+					goto reSelect;
+				}
+				else if (Chess::getStepNumber() <= 1)
+				{
+					GUI.renewChess();
+					GUI.showOutput();
+					goto reSelect;
+				}
+			}
+		}
 		legal = mainChess.whereCanGO(currentPosition);
 		if (legal.size() == 0)
 			goto reSelect;
+
 		// 提示可下的位置
 		GUI.showHint(legal);
 		// 移動棋子、改棋盤，畫出棋盤
@@ -50,7 +82,7 @@ int main()
 		}
 		mainChess.nextPlayer();
 
-
+		mainChess.renewHistory();
 		GUI.renewChess();
 		GUI.showOutput();
 	} while (Chess::getEnd() == -1);

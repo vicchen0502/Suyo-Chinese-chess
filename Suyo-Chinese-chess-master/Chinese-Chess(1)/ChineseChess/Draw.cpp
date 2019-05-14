@@ -4,6 +4,18 @@
 
 vector<vector<int>> Chess::chessBoard = {};
 
+// 利用巨集先定義 上,下,左,右,ESC
+#define ESC	27
+#define DIRECTION_KEYBOARD	224
+#define UP     72
+#define DOWN   80
+#define LEFT   75
+#define RIGHT  77
+#define ENTER  13
+#define SPACE  32
+#define NODE_LESS 44
+#define NODE_MORE 46
+
 void Draw::renewChessPart()
 {
 	// 一行一行去重做一個 String.
@@ -1079,4 +1091,66 @@ void Draw::renewChess()
 	renewChessPart();
 	renewLeft();
 	renewRight();
+}
+
+void Draw::showRegretMenu()
+{
+	int X = 35;
+	int Y = 8;
+	regretMenu = initialRegret(regretMenu);
+	for (int i = 0; i < regretMenu.size(); i++)
+	{
+		gotoxy(X, Y);
+		cout << regretMenu[i] << endl;
+		Y++;
+	}
+}
+
+int Draw::selectRegret()
+{
+	// 以下程式碼是移動游標
+	unsigned short int ch1, ch2;
+	unsigned short int X, Y;
+	int func;
+
+	// 200 是變成橫向游標  (你可以試試看	SetCursorVisible(TRUE, 100);)
+
+	SetCursorVisible(TRUE, 200);
+	gotoxy(41, 13);
+	X = 41;
+	Y = 13;
+	func = 0;
+	while (true)
+	{
+		ch1 = _getch();
+		if (ch1 == ENTER)
+		{
+			return func;
+			break;
+		}
+		else if (ch1 == DIRECTION_KEYBOARD)
+		{
+			ch2 = _getch();
+			switch (ch2)
+			{
+			case LEFT:
+				if (X == 41)
+					break;
+				X = X - 10;
+				gotoxy(X, Y);
+				func--;
+				break;
+			case RIGHT:
+				if (X == 51)
+					break;
+				X = X + 10;
+				gotoxy(X, Y);
+				func++;
+				break;
+			case ENTER:
+				return func;
+				break;
+			}
+		}
+	}
 }
