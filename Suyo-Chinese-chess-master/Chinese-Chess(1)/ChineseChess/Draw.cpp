@@ -832,11 +832,28 @@ void Draw::renewLeft()
 void Draw::renewRight()
 {
 	rightPart = initialRight(rightPart);
+	vector<int> bKingPos(2),rKingPos(2);
+	//確認對面王位置
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (Chess::chessBoard[i][j] == 1)
+			{
+				bKingPos = { i,j };
+			}
+			if (Chess::chessBoard[i][j] == 8)
+			{
+				rKingPos = { i,j };
+			}
+		}
+	}
 	if (Chess::getEnd() == -1)
 	{
 		if (Chess::whoseTurn == 0)
 		{
 			rightPart[3] = "║ 　　現在輪到　黑色方　下棋　　║ ";
+
 		}
 		else if (Chess::whoseTurn == 1)
 		{
@@ -993,6 +1010,10 @@ void Draw::showHint(vector<vector<int>>legalList)
 			else if (x == 5)
 			{
 				cout << "┬ " << endl;
+			}
+			else if (x == 0 || x == 9)
+			{
+				cout << "═ " << endl;
 			}
 			else
 			{

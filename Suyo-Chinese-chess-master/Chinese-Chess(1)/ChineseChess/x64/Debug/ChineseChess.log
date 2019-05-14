@@ -1,3 +1,8 @@
-﻿  Chess.cpp
-c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\chess.cpp(1468): warning C4267: '正在初始化': 將 'size_t' 轉換為 'int'，資料可能遺失
+﻿  Draw.cpp
+c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\draw.cpp(124): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\draw.cpp(280): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\draw.cpp(436): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\draw.cpp(592): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\draw.cpp(644): warning C4804: '<=': 作業中不安全的使用類型 'bool'
+c:\users\vic05\desktop\suyo-chinese-chess\suyo-chinese-chess-master\chinese-chess(1)\chinesechess\draw.cpp(748): warning C4804: '<=': 作業中不安全的使用類型 'bool'
   ChineseChess.vcxproj -> C:\Users\vic05\Desktop\Suyo-Chinese-chess\Suyo-Chinese-chess-master\Chinese-Chess(1)\x64\Debug\ChineseChess.exe

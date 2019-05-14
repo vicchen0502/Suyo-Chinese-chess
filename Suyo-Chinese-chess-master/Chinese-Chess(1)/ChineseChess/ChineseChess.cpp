@@ -21,6 +21,7 @@ int main()
 		vector<int>currentPosition = {};
 		vector<int>nextPosition = {};
 		vector<vector<int>>legal = {};
+		vector<vector<int>>nextLegal = {};
 		const vector<int>selectError = { -1,-1 };
 		reSelect:
 		currentPosition = mainChess.selectedChess();
