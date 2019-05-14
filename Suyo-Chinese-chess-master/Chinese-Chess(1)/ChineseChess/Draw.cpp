@@ -13,9 +13,12 @@ vector<vector<int>> Chess::chessBoard = {};
 #define RIGHT  77
 #define ENTER  13
 #define SPACE  32
-#define NODE_LESS 44
-#define NODE_MORE 46
+#define L_ANGLEBRACKET 44
+#define R_ANGLEBRACKET 46
 
+vector<string>Draw::leftPart = {};
+vector<string>Draw::rightPart = {};
+vector<string>Draw::chessPart = {};
 void Draw::renewChessPart()
 {
 	// 一行一行去重做一個 String.
@@ -824,6 +827,7 @@ void Draw::renewChessPart()
 void Draw::renewLeft()
 {
 	leftPart = initialSituation(leftPart);
+	
 	if (Chess::chessStep.size() > 0)
 	{
 		int n;
@@ -1152,5 +1156,19 @@ int Draw::selectRegret()
 				break;
 			}
 		}
+	}
+}
+
+void Draw::showCancelRegretMenu()
+{
+	int X = 35;
+	int Y = 8;
+	regretMenu = initialRegret(regretMenu);
+	regretMenu[3] = "║ 　　　確定還原？　　　║ ";
+	for (int i = 0; i < regretMenu.size(); i++)
+	{
+		gotoxy(X, Y);
+		cout << regretMenu[i] << endl;
+		Y++;
 	}
 }

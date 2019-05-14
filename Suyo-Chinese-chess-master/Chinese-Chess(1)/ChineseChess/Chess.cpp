@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "chess.h"
-
+#include "Draw.h"
 // 利用巨集先定義 上,下,左,右,ESC,ENTER,SPACE,左右角括號
 #define ESC	27
 #define DIRECTION_KEYBOARD	224
@@ -165,11 +165,11 @@ afterselect:
 		return position;
 		break;
 	case L_ANGLEBRACKET:
-		//TODO:悔棋
 		return {-2,-2};
 		break;
 	case R_ANGLEBRACKET:
 		//TODO:取消悔棋
+		//return {-3,-3};
 		return position;
 		break;
 	default:
@@ -1707,11 +1707,29 @@ void Chess::renewHistory()
 	chessRecord.push_back(chessBoard);
 }
 
-int Chess::getStepNumber()
+int& Chess::getStepNumber()
 {
 	return stepNumber;
 }
-void Chess::assignBoard(int count)
+
+void Chess::assignBoard()
 {
-	chessBoard = chessRecord[count];
+	recordStack.push_back(chessRecord[chessRecord.size() - 1]);
+	stepStack.push_back(chessStep[chessStep.size() - 1]);
+	chessRecord.pop_back();
+	chessStep.pop_back();
+	recordStack.push_back(chessRecord[chessRecord.size() - 1]);
+	chessRecord.pop_back();
+	chessStep.pop_back();
+	/*system("cls");
+	for (auto s : chessStep)
+		cout << s << endl;
+	cout << stepNumber << endl;
+	system("pause");*/
+	chessBoard = chessRecord[chessRecord.size() - 1];
+	Draw::leftPart[stepNumber] = "║ 　　　　　　　　　　　║ ";
+	stepNumber -= 1;
+	Draw::leftPart[stepNumber] = "║ 　　　　　　　　　　　║ ";
+	stepNumber -= 1;
+	//Draw::leftPart.pop_back();
 }

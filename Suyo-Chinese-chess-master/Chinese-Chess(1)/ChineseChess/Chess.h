@@ -9,6 +9,8 @@ public:
 private:
 	vector<vector<vector<int>>> chessRecord; //¾ú¥v¬ö¿ýtable
 	static vector<string> chessStep; //´ÑÃÐ
+	vector<vector<vector<int>>> recordStack; //®¬´Ñªº¦û¦s
+	vector<string>stepStack;//®¬´Ñ´Ñ¨Bªº¦û¦s
 	vector<vector<int>> legalMoveSpace;
 	static int whoseTurn ;
 	static int stepNumber ;
@@ -24,10 +26,10 @@ public:
 	void saveBoard(string fileName);
 	void nextPlayer();
 	void renewHistory();
-	void assignBoard(int count);
+	void assignBoard();
 	static void endGame(vector<int>des);
 	static int getEnd();
-	static int getStepNumber();
+	static int& getStepNumber();
 };
 
 

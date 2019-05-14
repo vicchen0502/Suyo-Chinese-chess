@@ -24,6 +24,7 @@ int main()
 		vector<vector<int>>nextLegal = {};
 		const vector<int>selectError = { -1,-1 };
 		const vector<int>regret = { -2,-2 };
+		//const vector<int>regretUndo = { -3,-3 };
 		reSelect:
 		currentPosition = mainChess.selectedChess();
 		if (currentPosition == selectError)
@@ -33,7 +34,8 @@ int main()
 			int change;
 			GUI.showRegretMenu();
 			change = GUI.selectRegret();
-			// 不毀棋。
+			// 不毀棋
+
 			if (change == 1)
 			{
 				GUI.showOutput();
@@ -44,8 +46,7 @@ int main()
 			{
 				if (Chess::getStepNumber() >= 2)
 				{
-					int count = Chess::getStepNumber() - 2;
-					mainChess.assignBoard(count);
+					mainChess.assignBoard();
 					GUI.renewChess();
 					GUI.showOutput();
 					goto reSelect;
@@ -58,6 +59,35 @@ int main()
 				}
 			}
 		}
+		/*else if (currentPosition == regretUndo)
+		{
+			int change;
+			GUI.showCancelRegretMenu();
+			change = GUI.selectRegret();
+			//不還原
+			if (change == 1)
+			{
+				GUI.showOutput();
+				goto reSelect;
+			}
+			// 還原
+			else if (change == 0)
+			{
+				if (Chess::getStepNumber() >= 2)
+				{
+					mainChess.assignBoard();
+					GUI.renewChess();
+					GUI.showOutput();
+					goto reSelect;
+				}
+				else if (Chess::getStepNumber() <= 1)
+				{
+					GUI.renewChess();
+					GUI.showOutput();
+					goto reSelect;
+				}
+			}
+		}*/
 		legal = mainChess.whereCanGO(currentPosition);
 		if (legal.size() == 0)
 			goto reSelect;

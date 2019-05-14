@@ -49,8 +49,8 @@ vector<string> intialBoard(vector<string>chessBoard)
 // 初始化戰況
 vector<string>initialSituation(vector<string>leftPart)
 {
-	leftPart.push_back("╔ ═ 　戰　況　顯　示　═ ╗ ");
-	leftPart.push_back("║ 　　　　　　　　　　　║ ");
+	leftPart.push_back("╔ ═ 　戰　況　顯　示　═ ╗ ");//0
+	leftPart.push_back("║ 　　　　　　　　　　　║ ");//1
 	leftPart.push_back("║ 　　　　　　　　　　　║ ");
 	leftPart.push_back("║ 　　　　　　　　　　　║ ");
 	leftPart.push_back("║ 　　　　　　　　　　　║ ");

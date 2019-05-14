@@ -9,9 +9,9 @@ class Draw
 {
 private:
 	vector<int>carList;
-	vector<string>chessPart;
-	vector<string>leftPart;
-	vector<string>rightPart;
+	static vector<string>chessPart;
+	static vector<string>leftPart;
+	static vector<string>rightPart;
 	vector<string>regretMenu;
 public:
 	friend class Chess;
@@ -19,7 +19,7 @@ public:
 	void showHint(vector<vector<int>>legalList);
 	void renewChess();
 	void showRegretMenu();
-
+	void showCancelRegretMenu();
 
 	int selectRegret();
 
