@@ -114,4 +114,20 @@ vector<string>initialRegret(vector<string>regretMenu)
 	regretMenu.push_back("╚ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╝ ");
 	return regretMenu;
 }
+vector<string>initialMainMenu(vector<string>mainMenu)
+{
+	mainMenu.clear();
+	mainMenu.push_back("╔═════════════════╗");
+	mainMenu.push_back("║     繼續遊戲    ║");
+	mainMenu.push_back("║═════════════════║");
+	mainMenu.push_back("║     重新開始    ║");
+	mainMenu.push_back("║═════════════════║");
+	mainMenu.push_back("║     存檔        ║");
+	mainMenu.push_back("║═════════════════║");
+	mainMenu.push_back("║     讀檔        ║");
+	mainMenu.push_back("║═════════════════║");
+	mainMenu.push_back("║     離開遊戲    ║");
+	mainMenu.push_back("╚═════════════════╝");
+	return mainMenu;
+}
 // 一般會略過此檔案，但若您目前正使用先行編譯過的標頭，則會先保留該檔案。

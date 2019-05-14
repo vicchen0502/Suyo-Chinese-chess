@@ -1110,6 +1110,19 @@ void Draw::showRegretMenu()
 	}
 }
 
+void Draw::showMainMenu()
+{
+	int X = 50;
+	int Y = 6;
+	mainMenu = initialMainMenu(mainMenu);
+	for (int i = 0; i < mainMenu.size(); i++)
+	{
+		gotoxy(X, Y);
+		cout << mainMenu[i] << endl;
+		Y++;
+	}
+}
+
 int Draw::selectRegret()
 {
 	// 以下程式碼是移動游標
@@ -1159,12 +1172,80 @@ int Draw::selectRegret()
 	}
 }
 
+int Draw::selectMainMenu()
+{
+	// 以下程式碼是移動游標
+	unsigned short int ch1, ch2;
+	unsigned short int X, Y;
+	int func;
+
+	SetCursorVisible(TRUE, 200);
+	gotoxy(56, 7);
+	X = 56;
+	Y = 7;
+	func = 0;
+	while (true)
+	{
+		ch1 = _getch();
+		if (ch1 == ENTER)
+		{
+			return func;
+			break;
+		}
+		else if (ch1 == DIRECTION_KEYBOARD)
+		{
+			ch2 = _getch();
+			switch (ch2)
+			{
+			case UP:
+				if (Y == 7)
+					break;
+				Y = Y - 2;
+				gotoxy(X, Y);
+				func--;
+				break;
+			case DOWN:
+				if (Y == 15)
+					break;
+				Y = Y + 2;
+				gotoxy(X, Y);
+				func++;
+				break;
+			case ENTER:
+				return func;
+				break;
+			}
+		}
+	}
+}
+
 void Draw::showUndoMenu()
 {
 	int X = 35;
 	int Y = 8;
 	regretMenu = initialRegret(regretMenu);
 	regretMenu[3] = "║ 　　　確定還原？　　　║ ";
+	for (int i = 0; i < regretMenu.size(); i++)
+	{
+		gotoxy(X, Y);
+		cout << regretMenu[i] << endl;
+		Y++;
+	}
+}
+
+void Draw::clearLeft()
+{
+	leftPart.clear();
+	leftPart = initialSituation(leftPart);
+}
+
+void Draw::showRestartMenu()
+{
+	int X = 35;
+	int Y = 8;
+	regretMenu = initialRegret(regretMenu);
+	regretMenu[2] = "║ 　　　遊戲結束　　　　║ ";
+	regretMenu[3] = "║ 　　是否重新開始？　　║ ";
 	for (int i = 0; i < regretMenu.size(); i++)
 	{
 		gotoxy(X, Y);

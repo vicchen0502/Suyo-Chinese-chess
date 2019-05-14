@@ -13,6 +13,7 @@ private:
 	static vector<string>leftPart;
 	static vector<string>rightPart;
 	vector<string>regretMenu;
+	vector<string>mainMenu;
 public:
 	friend class Chess;
 	void showOutput();			// show 邊框 + 戰況 + 棋盤 + 提醒黑紅方下棋 + 操作提示。
@@ -20,13 +21,15 @@ public:
 	void renewChess();
 	void showRegretMenu();
 	void showUndoMenu();
-
+	void showMainMenu();
 	int selectRegret();
-
+	int selectMainMenu();
 	void renewRight();
 	void renewLeft();
 	void renewChessPart();
 	void renewCarOrder();
+	void clearLeft();
+	void showRestartMenu();
 };
 
 #endif // DRAW_H

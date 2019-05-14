@@ -18,17 +18,21 @@ int main()
 	mainChess.renewHistory();
 	do
 	{
+
+		const vector<int>selectError = { -1,-1 };
+		const vector<int>regret = { -2,-2 };
+		const vector<int>regretUndo = { -3,-3 };
+		const vector<int>mainMenu = { -4,-4 };
+	reSelect:
 		vector<int>currentPosition = {};
 		vector<int>nextPosition = {};
 		vector<vector<int>>legal = {};
 		vector<vector<int>>nextLegal = {};
-		const vector<int>selectError = { -1,-1 };
-		const vector<int>regret = { -2,-2 };
-		const vector<int>regretUndo = { -3,-3 };
-		reSelect:
+
 		currentPosition = mainChess.selectedChess();
 		if (currentPosition == selectError)
 			goto reSelect;
+		//悔棋
 		else if (currentPosition == regret)
 		{
 			int change;
@@ -59,6 +63,7 @@ int main()
 				}
 			}
 		}
+		//還原
 		else if (currentPosition == regretUndo)
 		{
 			int change;
@@ -88,6 +93,59 @@ int main()
 				}
 			}
 		}
+		//選單
+		else if (currentPosition == mainMenu)
+		{
+			int change;
+			string temp;
+			GUI.showMainMenu();
+			change = GUI.selectMainMenu();
+
+			switch (change)
+			{
+			case 0:		// 繼續遊戲
+				GUI.showOutput();
+				goto reSelect;
+				break;
+			case 1:		// 重新遊戲
+				mainChess.readBoard("Initial.txt");
+				Chess::getStepNumber() = 0;
+				GUI.clearLeft();
+
+
+				GUI.renewChess();
+				GUI.showOutput();
+				goto reSelect;
+				break;
+			case 2:		// 存檔
+				system("cls");
+				cout << "請 輸 入 檔 名 + .副檔名" << endl;
+				cin >> temp;
+				mainChess.saveBoard(temp);
+
+				GUI.renewChess();
+				GUI.showOutput();
+				goto reSelect;
+				break;
+			case 3:		// 讀檔
+				system("cls");
+				cout << "請 輸 入 檔 名 + .副檔名" << endl;
+				cin >> temp;
+				mainChess.readBoard(temp);
+
+				GUI.clearLeft();
+				GUI.renewChess();
+				GUI.showOutput();
+				goto reSelect;
+				break;
+			case 4:		// 離開
+				system("cls");
+				goto end;
+				break;
+			default:
+				break;
+			}
+		}
 		legal = mainChess.whereCanGO(currentPosition);
 		if (legal.size() == 0)
 			goto reSelect;
@@ -102,19 +160,46 @@ int main()
 			GUI.showOutput();
 			goto reSelect;
 		}
+		// 判斷遊戲結束
 		if (Chess::getEnd() >= 0)
 		{
 			GUI.renewChess();
 			GUI.showOutput();
-			return Chess::getEnd();
-			break;
-		}
-		mainChess.nextPlayer();
+			GUI.showRestartMenu();
+			int change;
+			change = GUI.selectRegret();
+			if (change == 0)//結束遊戲後重新開始
+			{
+				mainChess.readBoard("Initial.txt");
+				Chess::getStepNumber() = 0;
+				GUI.clearLeft();
 
+
+				GUI.renewChess();
+				GUI.showOutput();
+				goto reSelect;
+				break;
+			}
+			else if (change == 1)//結束遊戲後離開程式
+			{
+				goto end;
+			}
+			
+			//return Chess::getEnd();
+			//break;
+		}
+
+		mainChess.nextPlayer();
 		mainChess.renewHistory();
 		GUI.renewChess();
 		GUI.showOutput();
 	} while (Chess::getEnd() == -1);
+end:
+	SetColor(207);
+	cout << endl << endl << endl << endl;
+	cout << " 已離開象棋遊戲 !! " << endl;
+	cout << endl << endl << endl << endl;
+	SetColor(15);
 	return 0;
 }
 

@@ -133,7 +133,7 @@ afterselect:
 	switch (func)
 	{
 	case ESC:
-		return position;
+		return {-4,-4};
 		break;
 	case ENTER:
 		if (whoseTurn == 0)
@@ -1351,9 +1351,10 @@ after:
 			endGame(position);
 			chessBoard[moveTo[0]][moveTo[1]] = chessBoard[pos[0]][pos[1]];
 			chessBoard[pos[0]][pos[1]] = 0;
-			//chessRecord.push_back(chessBoard);
+			
 			//確認是否和局(雙方皆剩下不可過河的棋子)
 			bool tie = false;
+			/*
 			for (int i = 0; i < 10; i++)
 			{
 				for (int j = 0; j < 9; j++)
@@ -1366,7 +1367,7 @@ after:
 					}
 					else tie = tie && false;
 				}
-			}
+			}*/
 			if (tie)
 				end = 2;
 			return position;
@@ -1392,9 +1393,10 @@ after:
 
 void Chess::readBoard(string filename)
 {
-	chessBoard = {};
-	chessRecord = {};
-	chessStep = {};
+	chessBoard.clear();
+	chessRecord.clear();
+	chessStep.clear();
+	stepNumber = 0;
 	ifstream fin(filename);
 	for (int i = 0; i < 10; i++)
 	{
@@ -1409,6 +1411,7 @@ void Chess::readBoard(string filename)
 	}
 	fin >> whoseTurn;
 	fin.close();
+	renewHistory();
 }
 
 void Chess::saveBoard(string filename)

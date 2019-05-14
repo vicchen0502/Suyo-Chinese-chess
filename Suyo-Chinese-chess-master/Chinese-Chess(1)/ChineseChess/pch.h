@@ -36,4 +36,6 @@ vector<string>initialSituation(vector<string>leftPart);
 vector<string>initialRight(vector<string>rightPart);
 // 毀棋選單
 vector<string>initialRegret(vector<string>regretMenu);
+//主選單
+vector<string>initialMainMenu(vector<string>mainMenu);
 #endif //PCH_H
